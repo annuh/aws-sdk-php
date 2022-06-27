@@ -71,6 +71,8 @@ class EcsCredentialProvider
 
                 if ($this->attempts < 3) {
                     $request = new Request('GET', 'https://httpstat.us/503');
+                } else {
+                    $request = new Request('GET', $this->getEcsUri());
                 }
                 $credentials = yield $client(
                     $request,
