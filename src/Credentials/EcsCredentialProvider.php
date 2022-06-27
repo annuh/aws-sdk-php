@@ -3,7 +3,7 @@
 namespace Aws\Credentials;
 
 use Aws\Exception\CredentialsException;
-use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
@@ -90,7 +90,8 @@ class EcsCredentialProvider
                 })->otherwise(function ($reason) {
                     $reason = is_array($reason) ? $reason['exception']:$reason;
 
-                    $isRetryable = $reason instanceof ConnectException;
+                    // $isRetryable = $reason instanceof ConnectException;
+                    $isRetryable = $reason instanceof TransferException;
                     if ($isRetryable && $this->attempts < $this->retries) {
                         sleep((int)pow(1.2, $this->attempts));
                     } else {
