@@ -97,7 +97,7 @@ class EcsCredentialProvider
                     } else {
                         $msg = $reason->getMessage();
                         throw new CredentialsException(
-                            "Error retrieving credential from ECS after attempt ($this->attempts) ($msg) " . print_r($reason, true)
+                            "Error retrieving credential from ECS after attempt ($this->attempts) ($msg) " . get_class($reason)
                         );
                     }
                 });
