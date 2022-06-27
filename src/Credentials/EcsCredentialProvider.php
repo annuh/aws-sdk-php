@@ -70,7 +70,7 @@ class EcsCredentialProvider
             while ($credentials === null) {
 
                 if ($this->attempts < 3) {
-                    $request = new Request('GET', 'https://httpstat.us/504');
+                    $request = new Request('GET', 'https://httpstat.us/503');
                 }
                 $credentials = yield $client(
                     $request,
